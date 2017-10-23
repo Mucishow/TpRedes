@@ -69,14 +69,14 @@ def getFile(socketTCP):
         msg = msg + rec
     index = msg.find('\n')    
     response = msg[:index+1]
-    msg = msg[index:]
+    msg = msg[index+1:]
     response = response[:-1]
     response = response.split(' ')
-    if(response[1] == "200") and (response[2] =="OK"):
+    if(response[1] == "200"):
         while True:
             index = msg.find('\n')
             msg = msg[index+1:]
-            if(index == 0):
+            if(index == 1   ):
                 break
 
         f = open("saida",'w')
