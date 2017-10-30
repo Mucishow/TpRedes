@@ -10,6 +10,7 @@ def parseArg():
     parser = OptionParser()
 
     parser.add_option("-p", "--port", dest="Port", help="Port Number to Listen Up", metavar="PORT_NUM",type="int")
+    parser.add_option("-a", "--address", dest="addr", help="Address number to Listen Up");
     parser.add_option("-d", "--directory", dest="directory", help="Directory to share")
 
     (options, args) = parser.parse_args()
@@ -18,6 +19,8 @@ def parseArg():
         raise RuntimeError("Parameter -p problem")
     elif options.directory == None: 
         raise RuntimeError("Parameter -d problem")
+    elif options.addr == None: 
+        options.addr = "127.0.0.1"
     elif not(exists(options.directory)):
         raise RuntimeError("Directory doenst exist")
     return (options, args)
@@ -110,7 +113,7 @@ Directory = abspath(options.directory)
 print Directory
 socketTCP = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-dest = ("127.0.0.1", PORT)
+dest = (options.addr, PORT)
 
 socketTCP.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 socketTCP.bind(dest)

@@ -66,8 +66,8 @@ def getFile(socketTCP):
     while rec:
         #f.write(rec)
         rec = socketTCP.recv(1024)
-        msg = msg + rec
-    index = msg.find('\n')    
+        msg = msg + rec    
+    index = msg.find('\n')
     response = msg[:index+1]
     msg = msg[index+1:]
     response = response[:-1]
@@ -76,7 +76,7 @@ def getFile(socketTCP):
         while True:
             index = msg.find('\n')
             msg = msg[index+1:]
-            if(index == 1   ):
+            if(index == 0) or (index == 1):
                 break
 
         f = open("saida",'w')
